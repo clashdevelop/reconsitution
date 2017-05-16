@@ -1,5 +1,13 @@
 package com.kbzgame.physics.elements;
 
-public class Area {
+import com.kbzgame.physics.shape.Shape;
 
+public class Area {
+	private Shape shape;
+	public Area(Shape shape){
+		this.shape = shape;
+	}
+	public Shape getShape(){
+		return shape;
+	}
 }
