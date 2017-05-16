@@ -1,5 +1,3 @@
 package com.kbzgame.physics.shape;
 
-public class Shape {
-
-}
+public class Shape {}
