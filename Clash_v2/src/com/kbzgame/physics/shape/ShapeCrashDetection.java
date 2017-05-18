@@ -3,7 +3,7 @@ package com.kbzgame.physics.shape;
 public abstract class ShapeCrashDetection {
 	private PolygonCrashWithPolygonStrategy pwpStrategy;
 	private PolygonCrashWithCircleStrategy pwcStrategy;
-	private CircleCrashWithCircleStrategy cwcStrategy;
+	private CircleCrashWithCircleStrategy cwcStrategy = new CircleCrashWithCircleStrategy();
 	public boolean ShapeCrashWithShape(Shape shapeA,Shape shapeB){
 		if(isPolygon(shapeA) && isPolygon(shapeB)){
 			return pwpStrategy.test((Polygon)shapeA,(Polygon)shapeB);
