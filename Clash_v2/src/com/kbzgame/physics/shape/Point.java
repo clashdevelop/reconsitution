@@ -7,9 +7,9 @@ public class Point{
 		this.x = x;
 		this.y = y;
 	}
-	public void changeBy(double dx,double dy){
-		x+=dx;
-		y+=dy;
+	public void changeBy(double tx,double ty){
+		x+=tx;
+		y+=ty;
 	}
 	public void changeTo(double x,double y){
 		this.x = x;

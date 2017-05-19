@@ -1,3 +1,5 @@
 package com.kbzgame.physics.shape;
 
-public class Shape {}
+public abstract class Shape {
+	public abstract void changePositionBy(double tx,double ty);
+}

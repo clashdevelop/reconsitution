@@ -13,4 +13,9 @@ public class Circle extends Shape{
 	public double getR(){
 		return r;
 	}
+	@Override
+	public void changePositionBy(double tx, double ty) {
+		// TODO Auto-generated method stub
+		position.changeBy(tx, ty);
+	}
 }

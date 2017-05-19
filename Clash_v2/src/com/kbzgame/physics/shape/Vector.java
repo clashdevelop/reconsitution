@@ -21,7 +21,6 @@ public class Vector {
 		//sizeX = size*Math.cos(angle);
 		//sizeY = size*Math.sin(angle);
 	}
-	
 	public static Vector convertVectorToReferenceFrame(Vector source,Vector xvector){
 		   double oldAngle = source.getAngle();
 		   double angle = xvector.getAngle();
