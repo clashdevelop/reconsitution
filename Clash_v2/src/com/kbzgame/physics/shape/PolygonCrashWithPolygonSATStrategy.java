@@ -1,6 +1,6 @@
 package com.kbzgame.physics.shape;
 
-public class PolygonCrashPolygonSATStrategy extends PolygonCrashWithPolygonStrategy{
+public class PolygonCrashWithPolygonSATStrategy extends PolygonCrashWithPolygonStrategy{
 
 	@Override
 	public boolean test(Polygon polygonA, Polygon polygonB) {

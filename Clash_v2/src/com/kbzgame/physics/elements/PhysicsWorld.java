@@ -14,16 +14,18 @@ public class PhysicsWorld {//默认为水平世界
 	private List<Timer> timerList = new ArrayList<Timer>();
 	private ExecutorService taskManager = Executors.newCachedThreadPool();
 	private double g = 1;
+	private long roundDelayTime_MS = 200;
 	public PhysicsWorld(){
 		taskManager.execute(new UpdateTask());
 	}
 	
 	public double getG(){return g;}
 	public void setG(double g){this.g = g;}
+	public void setroundDelayTime_MS(long delayTime){
+		roundDelayTime_MS = delayTime;
+	}
 	public void addBody(Body body){
 		bodyList.add(body);
-		body.setMinVSize(body.getf_factor()*g);
-		body.setMaxVSzie(10);
 	}
 	
 	private class UpdateTask implements Runnable{
@@ -39,7 +41,8 @@ public class PhysicsWorld {//默认为水平世界
 							body.move();
 						}
 					}
-					TimeUnit.MILLISECONDS.sleep(200);
+					
+					TimeUnit.MILLISECONDS.sleep(roundDelayTime_MS);
 				}
 			}catch(InterruptedException e){
 				//e.printStackTrace();

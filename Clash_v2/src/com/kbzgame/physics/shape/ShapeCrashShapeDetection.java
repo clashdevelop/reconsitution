@@ -1,10 +1,10 @@
 package com.kbzgame.physics.shape;
 
-public abstract class ShapeCrashDetection {
+public class ShapeCrashShapeDetection {
 	private PolygonCrashWithPolygonStrategy pwpStrategy;
 	private PolygonCrashWithCircleStrategy pwcStrategy;
 	private CircleCrashWithCircleStrategy cwcStrategy = new CircleCrashWithCircleStrategy();
-	public boolean ShapeCrashWithShape(Shape shapeA,Shape shapeB){
+	public boolean shapeCrashWithShape(Shape shapeA,Shape shapeB){
 		if(isPolygon(shapeA) && isPolygon(shapeB)){
 			return pwpStrategy.test((Polygon)shapeA,(Polygon)shapeB);
 		}
@@ -24,9 +24,6 @@ public abstract class ShapeCrashDetection {
 	}
 	public void setPolygonCrashWithCircleStrategy(PolygonCrashWithCircleStrategy pwcStrategy){
 		this.pwcStrategy = pwcStrategy;
-	}
-	public void setCircleCrashWithCircleStrategy(CircleCrashWithCircleStrategy cwcStrategy){
-		this.cwcStrategy = cwcStrategy;
 	}
 	private boolean isPolygon(Shape shape){
 		return Polygon.class.isInstance(shape);
