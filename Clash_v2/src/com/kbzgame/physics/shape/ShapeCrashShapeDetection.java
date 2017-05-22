@@ -1,8 +1,8 @@
 package com.kbzgame.physics.shape;
 
 public class ShapeCrashShapeDetection {
-	private PolygonCrashWithPolygonStrategy pwpStrategy;
-	private PolygonCrashWithCircleStrategy pwcStrategy;
+	private PolygonCrashWithPolygonStrategy pwpStrategy=new PolygonCrashWithPolygonSATStrategy();
+	private PolygonCrashWithCircleStrategy pwcStrategy=new PolygonCrashWithCircleSATStrategy();
 	private CircleCrashWithCircleStrategy cwcStrategy = new CircleCrashWithCircleStrategy();
 	public boolean shapeCrashWithShape(Shape shapeA,Shape shapeB){
 		if(isPolygon(shapeA) && isPolygon(shapeB)){
