@@ -1,7 +1,7 @@
 package com.kbzgame.physics.shape;
 
 public class PolygonCrashWithPolygonSATStrategy extends PolygonCrashWithPolygonStrategy{
-
+	
 	@Override
 	public boolean test(Polygon polygonA, Polygon polygonB) {
 		// TODO Auto-generated method stub
@@ -14,6 +14,7 @@ public class PolygonCrashWithPolygonSATStrategy extends PolygonCrashWithPolygonS
 			double minShadow_B = shadow_B[0];
 			double maxShadow_B = shadow_B[1];
 			if(maxShadow_A<minShadow_B || minShadow_A>maxShadow_B){
+				
 				return false;
 			}
 			

@@ -8,7 +8,7 @@ package com.kbzgame.physics.elements;
 import com.kbzgame.physics.shape.Shape;
 import com.kbzgame.physics.shape.Vector;
 
-public class Body {
+public class Body extends PhysicsElements{
 	private Shape shape;
 	private double m;
 	private double f_factor = 1;

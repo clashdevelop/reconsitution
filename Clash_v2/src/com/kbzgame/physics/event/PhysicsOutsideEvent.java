@@ -2,7 +2,7 @@ package com.kbzgame.physics.event;
 
 import com.kbzgame.physics.elements.Body;
 
-public class PhysicsOutsideEvent {
+public class PhysicsOutsideEvent extends PhysicsEvent{
 	private Body body;
 	public PhysicsOutsideEvent(Body body){
 		this.body = body;
