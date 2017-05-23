@@ -1,9 +1,9 @@
 package com.kbzgame.physics.shape;
 
 public class ShapeContainShapeDetection {
-	private PolygonContainPolygonStrategy pcpStrategy;
-	private PolygonContainCircleStrategy pccStrategy;
-	private CircleContainPolygonStrategy ccpStrategy;
+	private PolygonContainPolygonStrategy pcpStrategy=new PolygonContainPolygonSATStrategy();
+	private PolygonContainCircleStrategy pccStrategy=new PolygonContainCircleSATStrategy();
+	private CircleContainPolygonStrategy ccpStrategy = new CircleContainPolygonSATStrategy() ;
 	private CircleContainCircleStrategy cccStrategy = new CircleContainCircleStrategy();
 	public boolean shapeContainShape(Shape borderShape,Shape shape){
 		if(isPolygon(borderShape) && isPolygon(shape)){
