@@ -19,6 +19,21 @@ public class ShapeCrashShapeDetection {
 		}
 		return false;
 	}
+	public Vector getBackVector(Shape shapeA,Shape shapeB){
+		if(isPolygon(shapeA) && isPolygon(shapeB)){
+			return pwpStrategy.getBackVector();
+		}
+		else if(isPolygon(shapeA) && isCircle(shapeB)){
+			return pwcStrategy.getBackVector();
+		}
+		else if(isCircle(shapeA) && isPolygon(shapeB)){
+			return pwcStrategy.getBackVector();
+		}
+		else if(isCircle(shapeA) && isCircle(shapeB)){
+			return cwcStrategy.getBackVector();
+		}
+		return null;
+	}
 	public void setPolygonCrashWithPolygonStrategy(PolygonCrashWithPolygonStrategy pwpStrategy){
 		this.pwpStrategy = pwpStrategy;
 	}
