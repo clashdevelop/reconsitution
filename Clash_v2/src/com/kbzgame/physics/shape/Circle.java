@@ -24,9 +24,16 @@ public class Circle extends Shape{
 		double minShadow = 0;
 		double maxShadow = 0;
 		Vector shadowVector=Vector.convertVectorToReferenceFrame(new Vector(0,0,position.getX(),position.getY()),vector);
-		minShadow=Math.abs(shadowVector.getComponentX())-r;
-		maxShadow=Math.abs(shadowVector.getComponentX())+r;
+		minShadow=shadowVector.getComponentX()-r;
+		maxShadow=shadowVector.getComponentX()+r;
 		shadows[0] = minShadow;
 		shadows[1] = maxShadow;
 		return shadows;	}
+	@Override
+	public double[] getExtremePositons() {
+		// TODO Auto-generated method stub
+		return new double[]{getPosition().getY()+getR(),getPosition().getY()-getR(),
+				getPosition().getX()-getR(),getPosition().getX()+getR()};
+	}
+	
 }

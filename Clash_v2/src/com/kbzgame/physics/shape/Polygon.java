@@ -25,7 +25,7 @@ public class Polygon extends Shape{
 	public Vector[] getEdgeNormalVectors(){
 		Vector[] edgeVectors = getEdgeVectors();
 		Vector[] edgeNormalVectors = new Vector[edgeNum];
-		for(int i=0;i<edgeNum-1;i++){
+		for(int i=0;i<edgeNum;i++){
 			edgeNormalVectors[i] = new Vector(1,edgeVectors[i].getAngle()+Math.PI/2);
 		}
 		return edgeNormalVectors;
@@ -37,7 +37,12 @@ public class Polygon extends Shape{
 		for(int i=0;i<edgeNum;i++){
 			Vector pointVector = new Vector(0,0,points[i].getX(),points[i].getY());
 			Vector shadowVector = Vector.convertVectorToReferenceFrame(pointVector, vector);
-			double pointShadow = Math.abs(shadowVector.getComponentX());
+			if(i==0)
+			{
+				minShadow = shadowVector.getComponentX();
+				maxShadow = shadowVector.getComponentX();
+			}
+			double pointShadow = shadowVector.getComponentX();
 			if(pointShadow<minShadow){
 				minShadow = pointShadow;
 			}
@@ -56,4 +61,23 @@ public class Polygon extends Shape{
 			points[i].changeBy(tx, ty);
 		}
 	}
+	@Override
+	public double[] getExtremePositons() {
+		// TODO Auto-generated method stub
+		double left=10000;
+		double right=-1;
+		double top=-1;
+		double bottom=10000;
+		for(int i=0;i<points.length;i++)
+		{
+			if(points[i].getX()<left)left=points[i].getX();
+			if(points[i].getX()>right)right=points[i].getX();
+			if(points[i].getY()<bottom)bottom=points[i].getY();
+			if(points[i].getY()>top)top=points[i].getY();
+		}
+		double []extreme=new double[]{top,bottom,left,right};
+		return extreme;
+	}
+	
+	
 }

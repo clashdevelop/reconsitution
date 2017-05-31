@@ -15,16 +15,16 @@ public class PolygonCrashWithPolygonSATStrategy extends PolygonCrashWithPolygonS
 		backVector=new Vector(0,0);
 		for(int i=0;i<polygonA.getEdgeNum();i++){
 			double[] shadow_A = polygonA.shadowToVector(edgeNormalVectors_A[i]);
-			double[] shadow_B = polygonA.shadowToVector(edgeNormalVectors_A[i]);
+			double[] shadow_B = polygonB.shadowToVector(edgeNormalVectors_A[i]);
 			double minShadow_A = shadow_A[0];
 			double maxShadow_A = shadow_A[1];
 			double minShadow_B = shadow_B[0];
 			double maxShadow_B = shadow_B[1];
-			if(maxShadow_A<minShadow_B || minShadow_A>maxShadow_B){
+			if(minShadow_B-maxShadow_A>0.00001 || minShadow_A-maxShadow_B>0.00001){
 				return false;
 			}
 			
-			 if(maxShadow_A>minShadow_B)
+			 if(maxShadow_A>=minShadow_B)
 				if(maxShadow_A-minShadow_B<minSize){
 				minSize=maxShadow_A-minShadow_B;
 				angle=edgeNormalVectors_A[i].getAngle()+Math.PI;
@@ -39,15 +39,15 @@ public class PolygonCrashWithPolygonSATStrategy extends PolygonCrashWithPolygonS
 		Vector[] edgeNormalVectors_B = polygonB.getEdgeNormalVectors();
 		for(int i=0;i<polygonB.getEdgeNum();i++){
 			double[] shadow_A = polygonA.shadowToVector(edgeNormalVectors_B[i]);
-			double[] shadow_B = polygonA.shadowToVector(edgeNormalVectors_B[i]);
+			double[] shadow_B = polygonB.shadowToVector(edgeNormalVectors_B[i]);
 			double minShadow_A = shadow_A[0];
 			double maxShadow_A = shadow_A[1];
 			double minShadow_B = shadow_B[0];
 			double maxShadow_B = shadow_B[1];
-			if(maxShadow_A<minShadow_B || minShadow_A>maxShadow_B){
+			if(minShadow_B-maxShadow_A>0.00001 || minShadow_A-maxShadow_B>0.00001){
 				return false;
 			}
-			if(maxShadow_A>minShadow_B)
+			if(maxShadow_A>=minShadow_B)
 				 if(maxShadow_A-minShadow_B<minSize){
 				minSize=maxShadow_A-minShadow_B;
 				angle=edgeNormalVectors_B[i].getAngle()+Math.PI;

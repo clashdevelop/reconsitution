@@ -66,6 +66,12 @@ public class Vector {
 			else{angle=tangle+Math.PI;}
 		
 		}
+		if(angle>=2*Math.PI){
+			angle-=2*Math.PI;
+		}
 		return angle;
+	}
+	public String toString(){
+		return "("+getSize()+","+getAngle()+")";
 	}
 }

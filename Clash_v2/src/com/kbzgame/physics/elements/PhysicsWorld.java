@@ -6,7 +6,10 @@ import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.TimeUnit;
 
+import com.kbzgame.physics.shape.EdgeRect;
+import com.kbzgame.physics.shape.Shape;
 import com.kbzgame.physics.shape.Vector;
+import com.kbzgame.quadtree.Quadtree;
 
 public class PhysicsWorld {//默认为水平世界
 	private List<Body> bodyList = new ArrayList<Body>();
@@ -41,6 +44,22 @@ public class PhysicsWorld {//默认为水平世界
 							body.move();
 						}
 					}
+					
+//					for (int i = 0; i < allObjects.size(); i++) {
+//						  returnObjects.clear();
+//						  quad.retrieve(returnObjects, allObjects.get(i));
+//						  returnObjects.remove(allObjects.get(i));
+//						  for (int c = 0; c < returnObjects.size(); c++) {
+//						    // Run collision detection algorithm between objects
+//							//  System.out.println("just for trying !!");
+//							  System.out.println(shapeCrashShapeDetection.shapeCrashWithShape(allObjects.get(i), returnObjects.get(c)));
+//							  System.out.println(shapeCrashShapeDetection.getBackVector(allObjects.get(i), returnObjects.get(c))); ;
+//							  if(shapeCrashShapeDetection.shapeCrashWithShape(allObjects.get(i), returnObjects.get(c)))has++;
+//							  count++;
+//						  }
+						
+//						}
+					
 					
 					TimeUnit.MILLISECONDS.sleep(roundDelayTime_MS);
 				}

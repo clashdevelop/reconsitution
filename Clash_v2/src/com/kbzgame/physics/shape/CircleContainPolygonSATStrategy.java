@@ -17,7 +17,7 @@ public class CircleContainPolygonSATStrategy extends CircleContainPolygonStrateg
 			double maxShadow_A = shadow_polygon[1];
 			double minShadow_B = shadow_circle[0];
 			double maxShadow_B = shadow_circle[1];
-			if(!(minShadow_A<minShadow_B)&&(maxShadow_A>maxShadow_B))
+			if(!((minShadow_A<minShadow_B)&&(maxShadow_A>maxShadow_B)))
 				return false;
 			
 		}

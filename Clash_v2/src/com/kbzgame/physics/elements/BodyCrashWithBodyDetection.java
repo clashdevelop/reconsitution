@@ -14,10 +14,11 @@ public class BodyCrashWithBodyDetection {
 	}
 	public void test(List<Body> bodyList){
 		int bodySize = bodyList.size();
-		Body[] bodys = (Body[])bodyList.toArray();
+		Body[] bodys = new Body[bodySize];
+		bodyList.toArray(bodys);
 		for(int i = 0;i<bodySize-1;i++){
 			Body bodyA = bodys[i];
-			for(int j = 0;j<bodySize;j++){
+			for(int j = i+1;j<bodySize;j++){
 				Body bodyB = bodys[j];
 				if(shapeDetection.shapeCrashWithShape(bodyA.getShape(),bodyB.getShape())){
 					//do some thing
