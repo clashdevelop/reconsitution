@@ -4,6 +4,7 @@ import com.kbzgame.physics.shape.Shape;
 
 public class Area extends PhysicsElements {
 	private Shape shape;
+	private PhysicsWorld world;
 	public Area(Shape shape){
 		this.shape = shape;
 		
@@ -14,11 +15,13 @@ public class Area extends PhysicsElements {
 	@Override
 	public void addToWorld(PhysicsWorld world) {
 		// TODO Auto-generated method stub
-		world.addArea(this);
+		this.world = world;
+		this.world.addArea(this);
 	}
 	@Override
-	public void quitWorld(PhysicsWorld world) {
+	public void quitWorld() {
 		// TODO Auto-generated method stub
 		world.removeArea(this);
+		world = null;
 	}
 }

@@ -13,20 +13,24 @@ public class Contact {
 	private EventDispatcher dispatcher=null;
 	public void sendPhysicsEvent(PhysicsBodyCrashEvent physicsBodyCrashEvent){
 		if(dispatcher!=null)
-			dispatcher.notify(physicsBodyCrashEvent);	
+			dispatcher.notify(physicsBodyCrashEvent);
+		//System.out.println("physicsBodyCrashEvent");
 	}
 	public void sendPhysicsEvent(PhysicsInAreaEvent physicsInAreaEvent){
 		if(dispatcher!=null)
 			dispatcher.notify(physicsInAreaEvent);
+		//System.out.println("physicsInAreaEvent");
 	}
 	public void sendPhysicsEvent(PhysicsOutsideEvent physicsOutsideEvent){
 		if(dispatcher!=null)
 			dispatcher.notify(physicsOutsideEvent);
+		//System.out.println("physicsOutsideEvent");
 	}
 	public void sendPhysicsEvent(PhysicsTimeoverEvent physicsTimeoverEvent){
 		//just send time over event
 		if(dispatcher!=null)
 			dispatcher.notify(physicsTimeoverEvent);
+		//System.out.println("physicsTimeoverEvent");
 	}
 	
 	public void setEventDispatcher(EventDispatcher dispatcher){

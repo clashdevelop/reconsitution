@@ -10,13 +10,13 @@ import com.kbzgame.physics.event.PhysicsBodyCrashEvent;
 import com.kbzgame.physics.event.PhysicsInAreaEvent;
 import com.kbzgame.physics.event.PhysicsOutsideEvent;
 
-public class RulerContact extends Contact{
-	private List<Ruler> rulerList = new ArrayList<Ruler>();
+public class RuleContact extends Contact{
+	private List<Rule> rulerList = new ArrayList<Rule>();
 	public void sendPhysicsEvent(PhysicsBodyCrashEvent physicsBodyCrashEvent){
 		PhysicsElements bodyA = physicsBodyCrashEvent.getElementA();
 		PhysicsElements bodyB = physicsBodyCrashEvent.getElementB();
 		GameEvent gameEvent = null;
-		for(Ruler ruler:rulerList){
+		for(Rule ruler:rulerList){
 			//test every ruler
 			gameEvent = ruler.produceGameEvent(bodyA,bodyB,physicsBodyCrashEvent);
 			if(gameEvent != null){
@@ -33,7 +33,7 @@ public class RulerContact extends Contact{
 		PhysicsElements body = physicsInAreaEvent.getElementA();
 		PhysicsElements area = physicsInAreaEvent.getElementB();
 		GameEvent gameEvent = null;
-		for(Ruler ruler:rulerList){
+		for(Rule ruler:rulerList){
 			//test every ruler
 			gameEvent = ruler.produceGameEvent(body,area,physicsInAreaEvent);
 			if(gameEvent != null){
@@ -48,7 +48,7 @@ public class RulerContact extends Contact{
 	public void sendPhysicsEvent(PhysicsOutsideEvent physicsOutsideEvent){
 		PhysicsElements body = physicsOutsideEvent.getElement();
 		GameEvent gameEvent = null;
-		for(Ruler ruler:rulerList){
+		for(Rule ruler:rulerList){
 			//test every ruler
 			gameEvent = ruler.produceGameEvent(body,physicsOutsideEvent);
 			if(gameEvent != null){
@@ -60,7 +60,7 @@ public class RulerContact extends Contact{
 		}
 		super.sendPhysicsEvent(physicsOutsideEvent);
 	}
-	public void addGameRuler(Ruler ruler){
+	public void addGameRuler(Rule ruler){
 		rulerList.add(ruler);
 	}
 }

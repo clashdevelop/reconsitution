@@ -87,7 +87,7 @@ public class BodyMoveDetection {
 						double va_crashComponent = convertVa.getComponentX();
 						if(va_crashComponent>0){
 							//A的撞击力的大小
-							double crashfSize = bodyA.getM()*va_crashComponent*0.01;
+							double crashfSize = bodyA.getM()*va_crashComponent*0.05;
 							Vector crashFa = new Vector(crashfSize,crashDirectionAtoB.getAngle());
 							bodyB.addF(crashFa);
 						}
@@ -97,7 +97,7 @@ public class BodyMoveDetection {
 						Vector convertVb = Vector.convertVectorToReferenceFrame(vb,crashDirectionBtoA);
 						double vb_crashComponent = convertVb.getComponentX();
 						if(vb_crashComponent>0){
-							double crashfSize = bodyB.getM()*vb_crashComponent*0.01;
+							double crashfSize = bodyB.getM()*vb_crashComponent*0.05;
 							Vector crashFb = new Vector(crashfSize,crashDirectionBtoA.getAngle());
 							bodyA.addF(crashFb);
 						}

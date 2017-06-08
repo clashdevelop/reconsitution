@@ -18,8 +18,8 @@ public class RollerFactory {
 		return roller;
 	}
 	public static Roller createPolygonRoller(String name){
-		Point[] points = new Point[]{new Point(0,0),new Point(5,8),new Point(8,5),new Point(5,0)};
-		Roller roller = new Roller(ShapeFactory.createPolygon(points, 4));
+		Point[] points = new Point[]{new Point(0,5),new Point(5,10),new Point(10,10),new Point(10,0),new Point(5,0)};
+		Roller roller = new Roller(ShapeFactory.createPolygon(points, 5));
 		roller.setName(name);
 		return roller;
 	}

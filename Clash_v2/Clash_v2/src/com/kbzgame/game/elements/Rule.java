@@ -13,12 +13,12 @@ import com.kbzgame.game.event.GameEvent;
 import com.kbzgame.physics.elements.PhysicsElements;
 import com.kbzgame.physics.event.PhysicsEvent;
 
-public  class Ruler {
+public  class Rule {
 	private Class<? extends PhysicsElements> elementAClass;
 	private Class<? extends PhysicsElements> elementBClass;
 	private Class<? extends PhysicsEvent> physicsEventClass;
 	private Class<? extends GameEvent> gameEventClass;
-	public Ruler(Class<? extends PhysicsElements> elementAClass,Class<? extends PhysicsElements> elementBClass,Class<? extends PhysicsEvent> physicsEventClass,Class<? extends GameEvent> gameEventClass){
+	public Rule(Class<? extends PhysicsElements> elementAClass,Class<? extends PhysicsElements> elementBClass,Class<? extends PhysicsEvent> physicsEventClass,Class<? extends GameEvent> gameEventClass){
 		this.elementAClass = elementAClass;
 		this.elementBClass = elementBClass;
 		this.physicsEventClass = physicsEventClass;
@@ -29,7 +29,7 @@ public  class Ruler {
 			return null;
 		}
 		boolean compareSuccess = elementAClass.isInstance(elementA) && elementBClass.isInstance(elementB) && physicsEventClass.isInstance(physicsEvent)
-								||elementAClass.isInstance(elementA) && elementBClass.isInstance(elementB) && physicsEventClass.isInstance(physicsEvent);
+								||elementBClass.isInstance(elementA) && elementAClass.isInstance(elementB) && physicsEventClass.isInstance(physicsEvent);
 		if(compareSuccess){
 			try {
 				GameEvent gameEvent = gameEventClass.newInstance();
@@ -47,7 +47,7 @@ public  class Ruler {
 		}
 		return null;
 	}
-	public Ruler(Class<? extends PhysicsElements> elementClass,Class<? extends PhysicsEvent> physicsEventClass,Class<? extends GameEvent> gameEventClass){
+	public Rule(Class<? extends PhysicsElements> elementClass,Class<? extends PhysicsEvent> physicsEventClass,Class<? extends GameEvent> gameEventClass){
 		this.elementAClass = elementClass;
 		this.physicsEventClass = physicsEventClass;
 		this.gameEventClass = gameEventClass;

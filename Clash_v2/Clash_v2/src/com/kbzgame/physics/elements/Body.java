@@ -18,7 +18,8 @@ public class Body extends PhysicsElements{
 	private double maxVSize = 0;
 	private double minVSize = 0;
 	private boolean movable = false;
-	protected PhysicsWorld world;
+	private PhysicsWorld world;
+	
 	public Body(Shape shape){
 		this.shape = shape;
 		F = new Vector(0,0);
@@ -28,6 +29,12 @@ public class Body extends PhysicsElements{
 	public Shape getShape(){
 		synchronized (this) {
 			return shape;
+		}
+	}
+	public void setShape(Shape shape){
+		synchronized (this) {
+			
+			this.shape = shape;
 		}
 	}
 	public void setM(double m){
@@ -99,6 +106,12 @@ public class Body extends PhysicsElements{
 			return movable;
 		}
 	}
+	public PhysicsWorld getWorld(){
+		synchronized (this) {
+			return world;
+		}
+		
+	}
 	//this function needn't synchronized
 	public void addF(Vector F){
 		synchronized (this) {
@@ -131,15 +144,23 @@ public class Body extends PhysicsElements{
 		}
 	}
 	@Override
-	public void quitWorld(PhysicsWorld world) {
+	public void quitWorld() {
 		// TODO Auto-generated method stub
-		world.removeBody(this);
-		world = null;
+		synchronized (this) {
+			if(world!=null){
+				world.removeBody(this);
+				world = null;
+			}
+		}
 	}
 	@Override
 	public void addToWorld(PhysicsWorld world){
-		this.world = world;
-		minVSize =f_factor*world.getG();
-		world.addBody(this);
+		synchronized (this) {
+			minVSize =f_factor*world.getG();
+			this.world = world;
+			this.world.addBody(this);
+			
+		}
+		
 	}
 }
