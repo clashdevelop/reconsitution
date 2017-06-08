@@ -59,13 +59,4 @@ public class JsonHelper {
 		return null;
 	}
 	
-	public static JSONObject getRollerId(int id){
-		JSONObject sendJson = new JSONObject();
-		
-		sendJson.put("type", "localId");
-		sendJson.put("content", id);
-		
-		return sendJson;
-	}
-	
 }

@@ -28,6 +28,7 @@ public class PhysicsWorld {//默认为水平世界
 	private double g = 1;
 	
 	private Shape borderShape;
+	private String borderShapeStr;
 	private boolean running = false;
 	
 	private Contact contact;
@@ -40,9 +41,16 @@ public class PhysicsWorld {//默认为水平世界
 		detection = new BodyMoveDetection();
 		Point[] points = new Point[]{new Point(0,0),new Point(0,800),new Point(800,800),new Point(800,0)};
 		borderShape = ShapeFactory.createPolygon(points, 4);
+		borderShapeStr = borderShape.toString();
 	}
 	public void setBorderShape(Shape borderShape){
-		this.borderShape = borderShape;
+		if(!running){
+			this.borderShape = borderShape;
+			borderShapeStr = borderShape.toString();
+		}
+	}
+	public String getBorderShapeStr(){
+		return borderShapeStr;
 	}
 	public void open(){
 		running = true;
@@ -122,6 +130,7 @@ public class PhysicsWorld {//默认为水平世界
 					}
 					detection.test(borderShape,bodys,new ArrayList<Area>(areaList),contact);
 					//调用监视器 并用contact作为联系人
+					
 					List<Timer> timers = new ArrayList<Timer>(timerList);
 					for(Timer timer:timers){
 						if(timer.sendMessage()){

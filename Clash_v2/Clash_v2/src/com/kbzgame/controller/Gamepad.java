@@ -12,6 +12,8 @@ import com.kbzgame.game.elements.JsonHelper;
 import com.kbzgame.game.elements.Roller;
 import com.kbzgame.game.elements.RollerFactory;
 
+import net.sf.json.JSONObject;
+
 public class Gamepad {
 	private GameMap map;
 	private Roller roller;
@@ -30,7 +32,7 @@ public class Gamepad {
 	}
 	public void quitGame(){
 		taskManager.shutdownNow();
-		roller.quitWorld(map);
+		roller.quitWorld();
 	}
 	public void acceptCommandMessage(String commandMessage){
 		Command command = CommandFactory.creatCommand(commandMessage, roller);
@@ -42,11 +44,6 @@ public class Gamepad {
 			//e.printStackTrace();
 		}
 	}
-	public String getGamePadId() {
-		// TODO Auto-generated method stub
-		return JsonHelper.getRollerId( roller.getID()).toString();
-	}
-
 	private class CommandTask implements Runnable{
 		@Override
 		public void run(){

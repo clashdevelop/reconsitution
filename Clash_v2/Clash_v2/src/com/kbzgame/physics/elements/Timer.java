@@ -1,6 +1,7 @@
 package com.kbzgame.physics.elements;
 
 public class Timer extends PhysicsElements{
+	private PhysicsWorld world;
 	private long delayTime = 0;
 	private boolean timeover = true;
 	private boolean notify = false;
@@ -33,10 +34,11 @@ public class Timer extends PhysicsElements{
 	}
 	@Override
 	public void addToWorld(PhysicsWorld world){
-		world.addTimer(this);
+		this.world = world;
+		this.world.addTimer(this);
 	}
 	@Override
-	public void quitWorld(PhysicsWorld world){
+	public void quitWorld(){
 		world.removeTimer(this);
 	}
 }
