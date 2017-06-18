@@ -17,7 +17,7 @@ public class RollerFactory {
 		}
 	}
 	public static Roller createCircleRoller(String name,Shape borderShape){
-		Roller roller = new Roller(ShapeFactory.createCircle(5+(Math.random()*borderShape.getBorder().getRightX()-10),5+(Math.random()*borderShape.getBorder().getTopY()-10),5));
+		Roller roller = new Roller(ShapeFactory.createCircle(10+(Math.random()*borderShape.getBorder().getRightX()-10),10+(Math.random()*borderShape.getBorder().getTopY()-10),5));
 		roller.setName(name);
 		return roller;
 	}

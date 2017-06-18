@@ -31,12 +31,6 @@ public class PhysicsWorld {//默认为水平世界
 	private String borderShapeStr;
 	private boolean running = false;
 	
-	public Shape getBorderShape() {
-		synchronized (this) {
-			return borderShape;
-		}
-		
-	}
 	private Contact contact;
 	private EventDispatcher dispatcher;
 	private BodyMoveDetection detection;
@@ -53,6 +47,11 @@ public class PhysicsWorld {//默认为水平世界
 		if(!running){
 			this.borderShape = borderShape;
 			borderShapeStr = borderShape.toString();
+		}
+	}
+	public Shape getBorderShape(){
+		synchronized (this) {
+			return borderShape;
 		}
 	}
 	public String getBorderShapeStr(){
@@ -134,7 +133,7 @@ public class PhysicsWorld {//默认为水平世界
 							body.update();
 						}
 					}
-					detection.test(borderShape,bodys,new ArrayList<Area>(areaList),contact);
+					detection.test(getBorderShape(),bodys,new ArrayList<Area>(areaList),contact);
 					//调用监视器 并用contact作为联系人
 					
 					List<Timer> timers = new ArrayList<Timer>(timerList);

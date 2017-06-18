@@ -3,8 +3,8 @@ package com.kbzgame.game.elements;
 
 import com.kbzgame.game.event.RollerCrashRoller;
 import com.kbzgame.game.event.RollerStepInTrap;
-import com.kbzgame.game.skill.NonPersistentSkill;
-import com.kbzgame.game.skill.PersistentSkill;
+import com.kbzgame.game.skill.CrashSkill;
+import com.kbzgame.game.skill.FlashSkill;
 import com.kbzgame.game.skill.Skill;
 import com.kbzgame.physics.elements.Body;
 import com.kbzgame.physics.elements.PhysicsWorld;
@@ -20,8 +20,11 @@ public class Roller extends Body {
 	private int score = 0;
 	private Roller crasher;
 	private int crashRound;
-	public Skill skillOne = flashSkill();
-	public Skill skillTwo = clashSkill();
+	private EventListener intraplistener = new StepInTrapListener();
+	private EventListener crashlistener = new  RollerCrashRollerListener();
+	private Skill currentSkill = null;//ȷ��ֻ��һ�����ܿ�����һ��ʱ�����ͷ�
+	public Skill skillOne = new FlashSkill(this);
+	public Skill skillTwo = new CrashSkill(this);
 	public Roller(Shape shape){
 		super(shape);
 		setMovable(true);
@@ -71,6 +74,16 @@ public class Roller extends Body {
 			return crashRound;
 		}
 	}
+	public void setCurrentSkill(Skill currentSkill){
+		synchronized (this) {
+			this.currentSkill = currentSkill;
+		}
+	}
+	public Skill getCurrentSkill(){
+		synchronized (this) {
+			return currentSkill;
+		}
+	}
 	public void addMouseF(Vector mouseF){
 		synchronized (this) {
 			this.mouseF = mouseF;
@@ -95,79 +108,16 @@ public class Roller extends Body {
 	@Override
 	public void addToWorld(PhysicsWorld world){
 		super.addToWorld(world);
-		getWorld().registerEventListener(RollerStepInTrap.class,this,new StepInTrapListener());
-		getWorld().registerEventListener(RollerCrashRoller.class,this,new RollerCrashRollerListener());
+		getWorld().registerEventListener(RollerStepInTrap.class,this,intraplistener);
+		getWorld().registerEventListener(RollerCrashRoller.class,this,crashlistener);
 		GameSocket.addName(name);
 	}
 	@Override 
 	public void quitWorld(){
 		GameSocket.deleteName(name);//Thread safe
-		getWorld().unregisterEventListener(RollerStepInTrap.class,this,new StepInTrapListener());
-		getWorld().unregisterEventListener(RollerCrashRoller.class,this,new RollerCrashRollerListener());
+		getWorld().unregisterEventListener(RollerStepInTrap.class,this,intraplistener);
+		getWorld().unregisterEventListener(RollerCrashRoller.class,this,crashlistener);
 		super.quitWorld();
-	}
-	public Skill flashSkill(){
-		return new NonPersistentSkill(){
-
-			@Override
-			protected void useAction() {
-				// TODO Auto-generated method stub
-				Vector flashVector = new Vector(30,getV().getAngle());
-				changePositionBy(flashVector.getComponentX(),flashVector.getComponentY());
-			}
-
-			@Override
-			protected int useDelayRound() {
-				// TODO Auto-generated method stub
-				return (int)(5000/GameMap.roundDelayTime_MS);
-			}
-			
-		};
-	}
-	public Skill clashSkill(){
-		return new PersistentSkill(){
-			private double maxV;
-			private double preMaxV;
-			@Override
-			protected void useAction() {
-				// TODO Auto-generated method stub
-				System.out.println("clash used");
-				preMaxV = getMaxVSize();
-				maxV = 2;//world.maxVSize;
-				setMaxVSize(maxV);
-				Vector v = new Vector(maxV,getV().getAngle());
-				setV(v);
-			}
-
-			@Override
-			protected int keepActionRound() {
-				// TODO Auto-generated method stub
-				return (int)(1000/GameMap.roundDelayTime_MS);
-			}
-
-			@Override
-			protected void keepAction() {
-				// TODO Auto-generated method stub
-				if(maxV>preMaxV){
-					maxV -= 0.05;
-				}
-				else{
-					maxV = preMaxV;
-				}
-				setMaxVSize(maxV);
-			}
-
-			@Override
-			protected void endAction() {
-				// TODO Auto-generated method stub
-				setMaxVSize(preMaxV);
-			}
-
-			@Override
-			protected int useDelayRound() {
-				// TODO Auto-generated method stub
-				return (int)(2000/GameMap.roundDelayTime_MS);
-			}};
 	}
 	private class StepInTrapListener implements EventListener{
 
@@ -176,12 +126,11 @@ public class Roller extends Body {
 			// TODO Auto-generated method stub
 			//System.out.println("Listener use");
 			//changePositionBy(60, 60);
-			//quitWorld();
+			quitWorld();
 			Roller crasher = getCrasher();
 			if(crasher!=null){
 				crasher.addScore(10);
-				System.out.println(crasher.getName()+":"+crasher.getScore());
-
+				//System.out.println(crasher.getName()+":"+crasher.getScore());
 			}
 		}
 		
